@@ -13,10 +13,16 @@ def what_day(day, month, year):
   res = (7000 + (day + y + y / 4 - y / 100 + y / 400 + (31 + m) / 12)) % 7
   return days[res] 
 
+###
+#counting the number of days in the month
 def days_in_month(month, year):
   out = 28 + ((month + math.floor(month / 8)) % 2) + 2 % month + math.floor((1 + (1 - (year % 4 + 2) % (year % 4 + 1)) * ((year % 100 + 2) % (year % 100 + 1)) + (1 - (year % 400 + 2) % (year % 400 + 1))) / month) + math.floor(1/month) - math.floor(((1 - (year % 4 + 2) % (year % 4 + 1)) * ((year % 100 + 2) % (year % 100 + 1)) + (1 - (year % 400 + 2) % (year % 400 + 1)))/month)
   return int(out)
 
+###
+#this function help me sort dict
+#dict key is date
+#sorting dont sort dates how it should
 def sort_by_ordinal(input_date):
   return input_date.toordinal()
 
@@ -27,6 +33,7 @@ def dates_days(year):
   while day != date(year+1, 2, 1):
     dates_dict[day] = days[day.weekday()]
     day += timedelta(days = 1)
+#the old part where i didn't use datetime module
 #  for month in range(1, 13):
 #    for day in range(1, days_in_month(month, year)+1):
 #      if len(day) < 2:       
@@ -37,10 +44,12 @@ def dates_days(year):
 #        date_full += "0" + str(month) + "."
 #      else:
 #        date_full += str(month) + "."
-#        + "." + str(month) + "." + str(year)
+#      date_full += "." + str(year)
 #      dates_dict[date_full] = what_day(day, month, year) 
   return dates_dict
 
+###
+#print dates, weekdays and message in file
 def print_diary(year, filename):
   holidays_list = []
   holidays_file = open("holidays.txt", 'rU')
